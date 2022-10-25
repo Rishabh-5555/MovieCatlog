@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/app.css" />
+  </head>
+  <body>
+    <%- include('./include/nav.ejs') %>
+    <main>
+      <% if(movieData.length > 0) {%> <% for(let movie of movieData){ %>
+      <div class="card">
+        <div class="image">
+          <img src="<%=movie.imageurl  %> " alt="<%=movie.name %> " />
+        </div>
+        <div class="title">
+          <h1><%= movie.name %></h1>
+        </div>
+        <div class="des">
+          <p><%= movie.description %></p>
+        </div>
+
+        <form action="/delete-movie" method="POST">
+          <input type="hidden" value="<%= movie.id  %>" name="movieId" />
+
+          <button class="btn" type="submit">Delete</button>
+        </form>
+      </div>
+      <% } %> <% } else { %>
+      <h1>No movie had added please add movie.</h1>
+      <% } %>
+    </main>
+  </body>
+</html>
